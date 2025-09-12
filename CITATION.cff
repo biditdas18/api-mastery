@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this repo for learning or demos, please cite it."
+title: "API Mastery: Personal Tutorial + Safe AWS Labs"
+authors:
+  - family-names: "Das"
+    given-names: "Bidit"
+date-released: 2025-09-12
+license: "MIT"
+version: "0.1.0"
