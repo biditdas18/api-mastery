@@ -1,28 +1,63 @@
-# Python
+# --- Python ---
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.db
+*.sqlite3
+*.log
+
+# Virtual environments
 .venv/
+env/
+venv/
+ENV/
+
+# Type checking / linting
 .mypy_cache/
 .pytest_cache/
-.coverage
-htmlcov/
-.DS_Store
+ruff_cache/
 
-# Envs / secrets
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# --- Envs / secrets ---
 .env
 .env.*
 *.pem
 *.key
 
-# Editors
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# --- Editors ---
 .idea/
 .vscode/
+*.swp
+*.swo
 
-# Build
-dist/
-build/
-*.egg-info/
-
-# Local services
+# --- Local services ---
 .localstack/
 .redis/
+
+# --- Misc ---
+*.bak
+*.tmp
+
