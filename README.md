@@ -234,10 +234,5 @@ While PokéAPI is REST, let’s zoom out:
 
 🙏 Huge thanks to [PokéAPI](https://pokeapi.co/) for providing a free, public dataset that makes this journey hands-on and fun.
 
----
 
-⚡ Next: In **Phase 1**, we’ll turn these curls into a **line-by-line Python client** with schema validation and pagination handling.
 
----
-
-👉 Do you want me to also draft a **`phases/1-curl-labs/README.md`** with copy-paste curl commands + expected outputs, so readers can reproduce exactly what we just did before moving to Python?
