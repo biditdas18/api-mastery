@@ -1,3 +1,5 @@
+
+
 ---
 
 # Phase 1 — From curl to a Clean Python Client (PokéAPI)
