@@ -1,3 +1,6 @@
+
+---
+
 # 🗺 Phase 0 — The API Scavenger Hunt (Discovery in Action)
 
 > *“This is my personal journey to master APIs as part of preparing for an ML L5 role at a MAANG-level company. Each phase builds both skill and intuition. By Phase 5, the goal is to meet the API expectations of an ML L5 engineer.”*
@@ -161,27 +164,45 @@ This experiment is how you confirm the **pagination contract** and understand ho
 
 ## 0.6 Error Handling
 
+Let’s test how the API responds to something invalid:
+
 ```bash
 curl -i https://pokeapi.co/api/v2/pokemon/notapokemon
 ```
 
-Returns:
+Actual response:
 
 ```
-HTTP/2 404
-{
-  "detail": "Not found."
-}
+HTTP/2 404 
+content-type: text/plain; charset=utf-8
+content-length: 9
+...
+Not Found
 ```
 
-📌 Predictable JSON error format — crucial for client retries/fail-fast decisions.
+📌 **Observations:**
+
+* The **status code** is `404`.
+* The **Content-Type** is `text/plain` (not JSON).
+* The body is just the string: `"Not Found"`.
+
+⚠️ **ML L5 Lesson:**
+
+* **Never assume error bodies are JSON.**
+* Always inspect the `Content-Type` header.
+
+  * If it’s `application/json`, you can safely parse and extract fields.
+  * If it’s `text/plain`, treat it as opaque text and rely on the status code.
+* Build clients that adapt to **different error contracts** gracefully.
+
+This is what separates a robust service client from a brittle script.
 
 ---
 
 ## 0.7 Throttling & Bursts
 
 PokéAPI doesn’t aggressively rate-limit, but real APIs do.
-We simulate burst calls:
+We can simulate burst calls:
 
 ```bash
 seq 1 5 | xargs -I{} -n1 curl -s -o /dev/null -w "%{http_code}\n" \
@@ -189,6 +210,7 @@ seq 1 5 | xargs -I{} -n1 curl -s -o /dev/null -w "%{http_code}\n" \
 ```
 
 All return `200`.
+
 📌 Lesson: *In production APIs, you’d expect `429 Too Many Requests` + `Retry-After` headers. Always design clients to handle that scenario.*
 
 ---
@@ -200,7 +222,7 @@ From a single base URL, we now know:
 * The **root map** of resources.
 * Pagination style (`limit` + `offset`).
 * Entity schema (`pokemon/ditto`).
-* Error schema (404s).
+* Error contract (plain-text 404s).
 * The possibility of rate limiting.
 
 This is the ML L5 mindset: **discover, document, and anticipate** — not just consume.
@@ -234,5 +256,8 @@ While PokéAPI is REST, let’s zoom out:
 
 🙏 Huge thanks to [PokéAPI](https://pokeapi.co/) for providing a free, public dataset that makes this journey hands-on and fun.
 
+---
 
+⚡ Next: In **Phase 1**, we’ll turn these curls into a **line-by-line Python client** with schema validation and pagination handling.
 
+---
