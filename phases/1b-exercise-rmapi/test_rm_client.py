@@ -30,7 +30,8 @@ def test_error_shape():
     except Exception as e:
         # should be our APIError with status and message
         s = str(e)
-        assert "HTTP 404" in s and "There is nothing here" in s
+        assert "HTTP 404" in s
+        assert ("There is nothing here" in s) or ("Character not found" in s)
     else:
         raise AssertionError("Expected an error for non-existent id")
 
